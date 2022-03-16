@@ -11,6 +11,7 @@ bat 'mvn clean install'
 stage('Test'){
 steps{
 echo "This is test stage"
+bat 'mvn test'
 }
 }
 stage('Deploy'){
@@ -18,5 +19,33 @@ steps{
 echo "This is deploy stage"
 }
 }
+stage('Server'){
+    steps{
+    rtServer(
+    id: "jfrog",
+    url: 'https://nandhini.jfrog.io/artifactory',
+    bypassProxy: true,
+    timeout: 300
+            )
+        }
+    }
+    stage('Artifactory Upload'){
+    steps{
+    rtUpload(
+    serverId: "jfrog",
+    spec: '''{
+    "files": [
+    {
+    "pattern": "*.jar",
+    "target": "devops-pipeline-libs-snapshot-local"
+                }
+            ]
+        }''',
+      )
+      rtPublishBuildInfo(
+   serverId: "jfrog"
+        )
+     }
+    }
 }
 }
