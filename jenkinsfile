@@ -37,7 +37,7 @@ stage('Server'){
     "files": [
     {
     "pattern": "*.jar",
-    "target": "devops-pipeline-libs-snapshot-local"
+    "target": "demo-libs-snapshot-local"
                 }
             ]
         }''',
