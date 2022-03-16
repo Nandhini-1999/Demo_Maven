@@ -14,22 +14,22 @@ echo "This is test stage"
 bat 'mvn test'
 }
 }
-stage('Deploy'){
+stage('Package'){
 steps{
-echo "This is deploy stage"
+bat 'mvn package'
 }
 }
 stage('Server'){
     steps{
     rtServer(
     id: "jfrog",
-    url: 'https://nandhini.jfrog.io/artifactory',
+    url: 'https://nandhini.jfrog.io',
     bypassProxy: true,
     timeout: 300
             )
         }
     }
-    stage('Artifactory Upload'){
+    stage('Upload'){
     steps{
     rtUpload(
     serverId: "jfrog",
@@ -37,15 +37,20 @@ stage('Server'){
     "files": [
     {
     "pattern": "*.jar",
-    "target": "demo-libs-snapshot-local"
+    "target": "devops-pipeline-libs-snapshot-local"
                 }
             ]
         }''',
       )
+      }
+      }
+      stage('Publish build info'){
+      steps{
       rtPublishBuildInfo(
    serverId: "jfrog"
         )
      }
     }
+}
 }
 }
