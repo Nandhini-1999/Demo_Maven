@@ -3,7 +3,6 @@ agent any
 stages{
 stage('Build'){
 steps{
-
 echo "This is build stage"
 bat 'mvn clean install'
 }
@@ -11,46 +10,10 @@ bat 'mvn clean install'
 stage('Test'){
 steps{
 echo "This is test stage"
-bat 'mvn test'
 }
 }
-stage('Package'){
+stage('Deploy'){
 steps{
-bat 'mvn package'
+echo "This is deploy stage"
 }
-}
-stage('Server'){
-    steps{
-    rtServer(
-    id: "jfrog",
-    url: 'https://nandhini.jfrog.io',
-    bypassProxy: true,
-    timeout: 300
-            )
-        }
-    }
-    stage('Upload'){
-    steps{
-    rtUpload(
-    serverId: "jfrog",
-    spec: '''{
-    "files": [
-    {
-    "pattern": "*.jar",
-    "target": "devops-pipeline-libs-snapshot-local"
-                }
-            ]
-        }''',
-      )
-      }
-      }
-      stage('Publish build info'){
-      steps{
-      rtPublishBuildInfo(
-   serverId: "jfrog"
-        )
-     }
-    }
-}
-
 }
