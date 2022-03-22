@@ -18,7 +18,7 @@
 </properties>
   <distributionManagement>
     <snapshotRepository>
-      <id>admin</id>
+      <id>Free</id>
       <name>Free</name>
       <url>http://localhost:8081/repository/Free/</url>
       </snapshotRepository>
