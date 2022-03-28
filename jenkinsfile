@@ -30,6 +30,11 @@ pipeline{
         }
       }
     }
+    stage('Deploy'){
+      steps{
+        bat "mvn deploy"
+      }
+    }
     //stage('Server'){
    // steps{
     //rtServer(
@@ -40,23 +45,23 @@ pipeline{
       //      )
        // }
     //}
-    stage('Artifactory Upload'){
-    steps{
-    rtUpload(
-    serverId: "JFrog",
-    spec: '''{
-    "files": [
-    {
-    "pattern": "*.jar",
-    "target": "sample-libs-snapshot-local"
-                }
-            ]
-        }''',
-      )
-      rtPublishBuildInfo(
-   serverId: "JFrog"
-        )
-     }
-    }
+    //stage('Artifactory Upload'){
+    //steps{
+    //rtUpload(
+    //serverId: "JFrog",
+    //spec: '''{
+    //"files": [
+    //{
+    //"pattern": "*.jar",
+    //"target": "sample-libs-snapshot-local"
+      //          }
+       //     ]
+        //}''',
+      //)
+      //rtPublishBuildInfo(
+   //serverId: "JFrog"
+    //    )
+    // }
+    //}
     }
     }
