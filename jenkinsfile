@@ -30,16 +30,16 @@ pipeline{
         }
       }
     }
-    stage('Server'){
-    steps{
-    rtServer(
-    id: "JFrog",
-    url: 'https://nandhini.jfrog.io/artifactory',
-    bypassProxy: true,
-    timeout: 300
-            )
-        }
-    }
+    //stage('Server'){
+   // steps{
+    //rtServer(
+   // id: "JFrog",
+    //url: 'https://nandhini.jfrog.io/artifactory',
+    //bypassProxy: true,
+    //timeout: 300
+      //      )
+       // }
+    //}
     stage('Artifactory Upload'){
     steps{
     rtUpload(
