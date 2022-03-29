@@ -30,38 +30,38 @@ pipeline{
         }
       }
     }
-    stage("Quality Gate") {
-            steps {
-               waitForQualityGate abortPipeline: true
-            }
-          }
-    stage('Server'){
-    steps{
-    rtServer(
-    id: "JFrog",
-    url: 'https://nandhini.jfrog.io/artifactory',
-    bypassProxy: true,
-    timeout: 300
-            )
-        }
+    stage('Deploy'){
+      steps{
+        bat "mvn deploy:deploy -DgeneratePom=false -DrepositoryId=server -Durl=https://nandhini.jfrog.io/artifactory/sample-libs-snapshot -DpomFile=pom.xml -Dfile=target/Demo-0.0.1-SNAPSHOT.jar"
+      }
     }
-    stage('Artifactory Upload'){
-    steps{
-    rtUpload(
-    serverId: "JFrog",
-    spec: '''{
-    "files": [
-    {
-    "pattern": "*.jar",
-    "target": "sample-libs-snapshot-local"
-                }
-            ]
-        }''',
-      )
-      rtPublishBuildInfo(
-   serverId: "JFrog"
-        )
-     }
-    }
+    //stage('Server'){
+   // steps{
+    //rtServer(
+   // id: "JFrog",
+    //url: 'https://nandhini.jfrog.io/artifactory',
+    //bypassProxy: true,
+    //timeout: 300
+      //      )
+       // }
+    //}
+    //stage('Artifactory Upload'){
+    //steps{
+    //rtUpload(
+    //serverId: "JFrog",
+    //spec: '''{
+    //"files": [
+    //{
+    //"pattern": "*.jar",
+    //"target": "sample-libs-snapshot-local"
+      //          }
+       //     ]
+        //}''',
+      //)
+      //rtPublishBuildInfo(
+   //serverId: "JFrog"
+    //    )
+    // }
+    //}
     }
     }

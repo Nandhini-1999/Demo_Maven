@@ -14,13 +14,13 @@ public class test {
 		assertEquals(expected,actual);
 		
 	}
-	@Test
-	public void tester1() {
-		Addition a=new Addition();
-		int actual=a.add(25, 40);
-		int expected=65;
-		assertEquals(expected,actual);
+	//@Test
+	//public void tester1() {
+	//	Addition a=new Addition();
+	//	int actual=a.add(25, 40);
+	//	int expected=65;
+	//	assertEquals(expected,actual);
 		
-	}
+	//}
 
 }
