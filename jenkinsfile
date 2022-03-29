@@ -40,6 +40,8 @@ pipeline{
     rtServer(
     id: "JFrog",
     url: 'https://nandhini.jfrog.io/artifactory',
+    username: 'Nandhini',
+    password: 'Nandhini_99',
     bypassProxy: true,
     timeout: 300
             )
